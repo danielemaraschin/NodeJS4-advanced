@@ -1,4 +1,4 @@
-const roteador = require('express').Router()
+const roteador = require('express').Router({mergeParams: true}) //merge = junta os parametros que ta nivel acima com o roteador daqui 
 const Tabela = require('./TabelaProduto')
 
 roteador.get('/', async(requisicao, resposta) => {
