@@ -23,7 +23,6 @@ const colunas = {
         }
     }
 }
-
 const opcoes = {
     freezeTableName: true,
     tableName: 'produtos',
