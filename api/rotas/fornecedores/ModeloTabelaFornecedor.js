@@ -24,5 +24,5 @@ const opcoes = {
     updatedAt: 'dataAtualizacao',
     version: 'versao'
 }
-
+//usar instancia do sequelize (conectar com o db) pq so exportar nao vai criar a tb
 module.exports = instancia.define('fornecedor', colunas, opcoes)
