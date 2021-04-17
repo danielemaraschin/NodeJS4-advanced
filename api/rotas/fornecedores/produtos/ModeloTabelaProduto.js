@@ -13,6 +13,14 @@ const colunas = {
         type: Sequelize.INTEGER, //numerointeiro
         allowNull: false,
         defaultValue: 0
+    },
+    fornecedor: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+            model: require('../ModeloTabelaFornecedor'),
+            key: 'id'
+        }
     }
 }
 
