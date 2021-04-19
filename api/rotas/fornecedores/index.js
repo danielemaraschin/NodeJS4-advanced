@@ -6,7 +6,7 @@ const SerializadorFornecedor = require('../../Serializador').SerializadorFornece
 roteador.get('/', async (requisicao, resposta) => {
     console.log('Im in index fornecedores');
     const resultados = await TabelaFornecedor.listar()
-    console.log('I have results');
+    console.log('LISTANDO');
     resposta.status(200)
     const serializador = new SerializadorFornecedor(
         resposta.getHeader('Content-Type')
@@ -77,7 +77,7 @@ roteador.delete('/:idFornecedor', async (requisicao, resposta, proximo) => {
         proximo(erro)
     }
 })
-
+/*arquivo de rotas dos fornecedores*/
 const roteadorProdutos = require('./produtos')
 roteador.use('/:idFornecedor/produtos', roteadorProdutos)
 
