@@ -2,7 +2,7 @@ const Tabela = require('./TabelaProduto')
 
 class Produto {
     //constructor pega dados que recebemos e passa para uma instancia 
-    constructor({id, titulo, preco, estoque, fornecedor, dataCriacao, dataAtualizacao, versao}) {
+    constructor({ id, titulo, preco, estoque, fornecedor, dataCriacao, dataAtualizacao, versao }) {
         this.id = id
         this.titulo = titulo
         this.preco = preco
@@ -14,17 +14,17 @@ class Produto {
     }
 
 
-    async criar () { //camando o dao - se comunicando com a tabelaProduto (por isso chama no inicio do arquivo)
-      const resultado = await Tabela.inserir({
-          titulo: this.titulo,
-          preco: this.preco,
-          estoque: this.estoque,
-          fornecedor: this.fornecedor
-      }) 
-      this.id = resultado.id 
-      this.dataAtualizacao = resultado.dataAtualizacao
-      this.dataCriacao = resultado.dataCriacao
-      this.versao = resultado.versao
+    async criar() { //chama o dao (se comunicando com a tabelaProduto,por isso chama no inicio do arquivo) criando o metodo criar
+        const resultado = await Tabela.inserir({
+            titulo: this.titulo,
+            preco: this.preco,
+            estoque: this.estoque,
+            fornecedor: this.fornecedor
+        })
+        this.id = resultado.id
+        this.dataAtualizacao = resultado.dataAtualizacao
+        this.dataCriacao = resultado.dataCriacao
+        this.versao = resultado.versao
     }
 }
 
