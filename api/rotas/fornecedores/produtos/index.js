@@ -9,11 +9,14 @@ roteador.get('/', async(requisicao, resposta) => {
     )
 })
 // Vamos trabalhar na raiz da requisicao por isso '/'
-roteador.post('/', (requisicao, resposta) => {
+roteador.post('/', async (requisicao, resposta) => {
     const idFornecedor = require.params.idFornecedor
     const corpo = require.body
     const dados = Object.assign({}, corpo, {fornecedor: idFornecedor}) //temos a coluna fornecedor na tb produtos
-    const produto = new Produto(dados)    //instanciar a classe
+    const produto = new Produto(dados)    //instanciar a classe produto
+    await produto.criar()
+    resposta.status(201)
+    resposta.send(produto)
  })
 
 
