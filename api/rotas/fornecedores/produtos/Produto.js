@@ -1,3 +1,5 @@
+const Tabela = require('./TabelaProduto')
+
 class Produto {
     //constructor pega dados que recebemos e passa para uma instancia 
     constructor({id, titulo, preco, estoque, fornecedor, dataCriacao, dataAtualizacao, versao}) {
@@ -9,6 +11,11 @@ class Produto {
         this.dataCriacao = dataCriacao
         this.dataAtualizacao = dataAtualizacao
         this.versao = versao
+    }
+
+
+    async criar () { //camando o dao - se comunicando com a tabelaProduto (por isso chama no inicio do arquivo)
+        
     }
 }
 
