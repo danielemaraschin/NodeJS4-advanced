@@ -8,6 +8,9 @@ module.exports = {
                 fornecedor: idFornecedor//campo fornecedor do produto deve ser igual ao idFornecedor do fornecedor
             }
         })
+    }, 
+    inserir (dados) {
+        return Modelo.create(dados) //metodo sequelize para criar com os dados q temos
     }
 }
 
