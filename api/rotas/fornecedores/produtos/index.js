@@ -7,31 +7,12 @@ roteador.get('/', async(requisicao, resposta) => {
         JSON.stringify(produtos)
     )
 })
-
+// Vamos trabalhar na raiz da requisicao por isso '/'
 roteador.post('/', (requisicao, resposta) => {
     const idFornecedor = require.params.idFornecedor
-    resposta.send(JSON.stringify())
-})
-
-roteador.post('/', async (requisicao, resposta, proximo) => {
-    try {
-        const dadosRecebidos = requisicao.body
-        const fornecedor = new Fornecedor(dadosRecebidos)
-        await fornecedor.criar()
-        resposta.status(201)
-        const serializador = new SerializadorFornecedor(
-            resposta.getHeader('Content-Type')
-        )
-        resposta.send(
-            serializador.serializar(fornecedor)
-        )
-    } catch (erro) {
-        proximo(erro)
-    }
-})
-
-
-
+    const corpo = require.body
+    const dados = Object.assign({}, corpo, {fornecedor: idFornecedor}) //temos a coluna fornecedor na tb produtos
+ })
 
 
 const roteadorReclamacoes = require('./reclamacoes')
