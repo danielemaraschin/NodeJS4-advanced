@@ -15,7 +15,16 @@ class Produto {
 
 
     async criar () { //camando o dao - se comunicando com a tabelaProduto (por isso chama no inicio do arquivo)
-        
+      const resultado = await Tabela.inserir({
+          titulo: this.titulo,
+          preco: this.preco,
+          estoque: this.estoque,
+          fornecedor: this.fornecedor
+      }) 
+      this.id = resultado.id 
+      this.dataAtualizacao = resultado.dataAtualizacao
+      this.dataCriacao = resultado.dataCriacao
+      this.versao = resultado.versao
     }
 }
 
