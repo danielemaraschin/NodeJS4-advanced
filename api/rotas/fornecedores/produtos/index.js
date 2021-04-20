@@ -13,6 +13,7 @@ roteador.post('/', (requisicao, resposta) => {
     const idFornecedor = require.params.idFornecedor
     const corpo = require.body
     const dados = Object.assign({}, corpo, {fornecedor: idFornecedor}) //temos a coluna fornecedor na tb produtos
+    const produto = new Produto(dados)    //instanciar a classe
  })
 
 
