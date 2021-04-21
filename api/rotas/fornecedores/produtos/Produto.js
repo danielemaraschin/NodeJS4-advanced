@@ -13,6 +13,12 @@ class Produto {
         this.versao = versao
     }
 
+    validar () {
+        if (typeof this.titulo !== 'string' || this.titulo.length === 0){
+            throw new Error ('O campo Título está inválido')
+        }
+        if ()
+    }
 
     async criar() { //chama o dao (se comunicando com a tabelaProduto,por isso chama no inicio do arquivo) criando o metodo criar
         const resultado = await Tabela.inserir({
