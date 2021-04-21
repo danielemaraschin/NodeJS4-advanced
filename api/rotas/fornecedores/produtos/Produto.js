@@ -16,6 +16,9 @@ class Produto {
     validar () {
         if (typeof this.titulo !== 'string' || this.titulo.length === 0){
             throw new Error ('O campo Título está inválido')
+        }           //no js seja com ponto flutuante ou nao, o typeof é 'number'
+        if (typeof this.preco !== 'number' || this.preco === 0) {
+            throw new Error("Campo preço está inválido.")
         }
         if ()
     }
