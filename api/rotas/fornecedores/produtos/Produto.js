@@ -26,6 +26,10 @@ class Produto {
         this.dataCriacao = resultado.dataCriacao
         this.versao = resultado.versao
     }
+
+    apagar () { //se comunica com o DAO que é a tabelaProduto para poder remover o produto indicado
+        return Tabela.remover(this.id, this.fornecedor)
+    }
 }
 
 module.exports = Produto

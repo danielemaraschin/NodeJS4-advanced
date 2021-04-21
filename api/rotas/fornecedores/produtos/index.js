@@ -20,11 +20,11 @@ roteador.post('/', async (requisicao, resposta) => {
  })
 
 roteador.delete('/:id', (requisicao, resposta) => {
-    const dados = {
+    const dados = {             //dados que temos nesse momento
         id: requisicao.params.id,
         fornecedor:requisicao.params.idFornecedor
     }
-    const produto = new Produto(dados)
+    const produto = new Produto(dados) //instanciar a classe
 })
 
 
