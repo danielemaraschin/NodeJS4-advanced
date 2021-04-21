@@ -14,7 +14,7 @@ module.exports = {
     }, 
 
     remover (idProduto, idFornecedor){
-        return Modelo.destroy({ 
+        return Modelo.destroy({ //destroy está se comunicando com db entao usar no arquivo de rotas
             where: {
                 id: idProduto,
                 fornecedor: idFornecedor
