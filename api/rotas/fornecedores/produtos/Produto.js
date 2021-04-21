@@ -13,17 +13,17 @@ class Produto {
         this.versao = versao
     }
 
-    validar () {
-        if (typeof this.titulo !== 'string' || this.titulo.length === 0){
-            throw new Error ('O campo Título está inválido')
+    validar() {
+        if (typeof this.titulo !== 'string' || this.titulo.length === 0) {
+            throw new Error('O campo Título está inválido')
         }           //no js seja com ponto flutuante ou nao, o typeof é 'number'
         if (typeof this.preco !== 'number' || this.preco === 0) {
             throw new Error("Campo preço está inválido.")
         }
-        if ()
     }
 
     async criar() { //chama o dao (se comunicando com a tabelaProduto,por isso chama no inicio do arquivo) criando o metodo criar
+        this.validar()
         const resultado = await Tabela.inserir({
             titulo: this.titulo,
             preco: this.preco,
@@ -36,7 +36,7 @@ class Produto {
         this.versao = resultado.versao
     }
 
-    apagar () { //se comunica com o DAO que é a tabelaProduto para poder remover o produto indicado
+    apagar() { //se comunica com o DAO que é a tabelaProduto para poder remover o produto indicado
         return Tabela.remover(this.id, this.fornecedor)
     }
 }
