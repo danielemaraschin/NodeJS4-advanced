@@ -19,12 +19,15 @@ roteador.post('/', async (requisicao, resposta) => {
     resposta.send(produto)
  })
 
-roteador.delete('/:id', (requisicao, resposta) => {
+roteador.delete('/:id', async (requisicao, resposta) => {
     const dados = {             //dados que temos nesse momento
         id: requisicao.params.id,
         fornecedor:requisicao.params.idFornecedor
     }
     const produto = new Produto(dados) //instanciar a classe
+    await produto.apagar() //espera terminar de executar a funcao para apagar
+    resposta.status(204) //204: foi um sucesso mas nao tem corpo de resposta
+    resposta.end()
 })
 
 
