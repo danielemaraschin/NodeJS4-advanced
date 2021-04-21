@@ -1,4 +1,4 @@
-const roteador = require('express').Router({mergeParams: true}) //merge = junta os parametros que ta nivel acima com o roteador daqui 
+const roteador = require('express').Router({ mergeParams: true }) //merge = junta os parametros que ta nivel acima com o roteador daqui 
 const Tabela = require('./TabelaProduto')
 const Produto = require('./Produto') //chamar a classe
 
@@ -10,8 +10,8 @@ roteador.get('/', async(requisicao, resposta) => {
 })
 // Vamos trabalhar na raiz da requisicao por isso '/'
 roteador.post('/', async (requisicao, resposta) => {
-    const idFornecedor = require.params.idFornecedor
-    const corpo = require.body
+    const idFornecedor = requisicao.params.idFornecedor
+    const corpo = requisicao.body
     const dados = Object.assign({}, corpo, {fornecedor: idFornecedor}) //temos a coluna fornecedor na tb produtos
     const produto = new Produto(dados)    //instanciar a classe produto
     await produto.criar()
@@ -19,9 +19,16 @@ roteador.post('/', async (requisicao, resposta) => {
     resposta.send(produto)
  })
 
+roteador.delete('/:id', (requisicao, resposta) => {
+    const dados = {
+        id: requisicao.params.id,
+        fornecedor:requisicao.params.idFornecedor
+    }
+    const produto = new Produto(dados)
+})
+
 
 const roteadorReclamacoes = require('./reclamacoes')
-
 roteador.use('/:idProduto/reclamacoes', roteadorReclamacoes)
 
 module.exports = roteador
