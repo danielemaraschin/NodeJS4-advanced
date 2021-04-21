@@ -11,6 +11,15 @@ module.exports = {
     }, 
     inserir (dados) {
         return Modelo.create(dados) //metodo sequelize para criar com os dados q temos
+    }, 
+
+    remover (idProduto, idFornecedor){
+        return Modelo.destroy({ 
+            where: {
+                id: idProduto,
+                fornecedor: idFornecedor
+            }
+        })
     }
 }
 
