@@ -9,14 +9,19 @@ roteador.get('/', async(requisicao, resposta) => {
     )
 })
 // Vamos trabalhar na raiz da requisicao por isso '/'
-roteador.post('/', async (requisicao, resposta) => {
-    const idFornecedor = requisicao.params.idFornecedor
-    const corpo = requisicao.body
-    const dados = Object.assign({}, corpo, {fornecedor: idFornecedor}) //temos a coluna fornecedor na tb produtos
-    const produto = new Produto(dados)    //instanciar a classe produto
-    await produto.criar()
-    resposta.status(201)
-    resposta.send(produto)
+roteador.post('/', async (requisicao, resposta, proximo) => {
+    try{
+        const idFornecedor = requisicao.params.idFornecedor
+        const corpo = requisicao.body
+        const dados = Object.assign({}, corpo, {fornecedor: idFornecedor}) //temos a coluna fornecedor na tb produtos
+        const produto = new Produto(dados)    //instanciar a classe produto
+        await produto.criar()
+        resposta.status(201)
+        resposta.send(produto)
+
+    } catch(erro) {
+        proximo(erro)
+    } 
  })
 
 roteador.delete('/:id', async (requisicao, resposta) => {
