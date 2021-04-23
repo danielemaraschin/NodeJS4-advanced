@@ -8,7 +8,7 @@ roteador.get('/', async(requisicao, resposta) => {
         JSON.stringify(produtos)
     )
 })
-// Vamos trabalhar na raiz da requisicao por isso '/'
+// Vamos trabalhar na raiz da requisicao por isso '/' //PROXIMO é o midleware
 roteador.post('/', async (requisicao, resposta, proximo) => {
     try{
         const idFornecedor = requisicao.params.idFornecedor
