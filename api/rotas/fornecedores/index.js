@@ -77,8 +77,22 @@ roteador.delete('/:idFornecedor', async (requisicao, resposta, proximo) => {
         proximo(erro)
     }
 })
+
 /*arquivo de rotas dos fornecedores*/
 const roteadorProdutos = require('./produtos')
-roteador.use('/:idFornecedor/produtos', roteadorProdutos)
+
+const verificarFornecedor = async (requisicao, resposta, proximo) => {
+    try{
+        const id = requisicao.params.idFornecedor //pega o id do fornecedor
+        const fornecedor = new Fornecedor({id: id}) //instancia a classe e passa pra ela qual o id do fornecedor que estamos recebendo
+        await fornecedor.carregar() //chama o metodo para procurar no db e preencher a instancia e caso o fornecedor com esse id nao exista ele vai mandar um erro
+        proximo()
+    } catch(erro)  { //já q vai emitir um erro, iremos captura-lo com o bloco 'catch'
+        proximo(erro)
+    }
+    
+}
+
+roteador.use('/:idFornecedor/produtos', verificarFornecedor, roteadorProdutos)
 
 module.exports = roteador
