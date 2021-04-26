@@ -3,7 +3,7 @@ const Tabela = require('./TabelaProduto')
 const Produto = require('./Produto') //chamar a classe
 
 roteador.get('/', async(requisicao, resposta) => {
-    const produtos = await Tabela.listar(requisicao.params.idFornecedor)
+    const produtos = await Tabela.listar(requisicao.fornecedor.id) //fornecedor.id é a instancia já injetada na rota fornecedores
     resposta.send(
         JSON.stringify(produtos)
     )
