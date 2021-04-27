@@ -11,7 +11,7 @@ roteador.get('/', async(requisicao, resposta) => {
 // Vamos trabalhar na raiz da requisicao por isso '/' //PROXIMO é o midleware
 roteador.post('/', async (requisicao, resposta, proximo) => {
     try{
-        const idFornecedor = requisicao.params.idFornecedor
+        const idFornecedor = requisicao.fornecedor.id
         const corpo = requisicao.body
         const dados = Object.assign({}, corpo, {fornecedor: idFornecedor}) //temos a coluna fornecedor na tb produtos
         const produto = new Produto(dados)    //instanciar a classe produto
@@ -27,7 +27,7 @@ roteador.post('/', async (requisicao, resposta, proximo) => {
 roteador.delete('/:id', async (requisicao, resposta) => {
     const dados = {             //dados que temos nesse momento
         id: requisicao.params.id,
-        fornecedor:requisicao.params.idFornecedor
+        fornecedor: requisicao.params.idFornecedor
     }
     const produto = new Produto(dados) //instanciar a classe
     await produto.apagar() //espera terminar de executar a funcao para apagar
