@@ -27,7 +27,7 @@ roteador.post('/', async (requisicao, resposta, proximo) => {
 roteador.delete('/:id', async (requisicao, resposta) => {
     const dados = {             //dados que temos nesse momento
         id: requisicao.params.id,
-        fornecedor:requisicao.fornecedor.id
+        fornecedor:requisicao.fornecedor.id //fornecedor.id é a instancia já injetada na rota fornecedores
     }
     const produto = new Produto(dados) //instanciar a classe
     await produto.apagar() //espera terminar de executar a funcao para apagar
