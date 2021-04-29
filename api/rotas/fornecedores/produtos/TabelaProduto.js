@@ -22,12 +22,13 @@ module.exports = {
         })
     },
     async pegarPorId (idProduto, idFornecedor){
-        const encontrado = await Modelo.findOne({
+        const encontrado = await Modelo.findOne({ //modelo sequelize vai voltar com vários métodos e funcoes que os objetos sequelize tem
             where: {
                 id: idProduto,
                 fornecedor: idFornecedor
-            }
-        })
+            },
+            raw: true //para não retornar com todos os métodos do sequelize(pq estamos usando uma instancia do sequelize)
+        })          //para voltar um objeto puro
         if(!encontrado){
             throw new Error('Produto não foi encontrado!')
         }
