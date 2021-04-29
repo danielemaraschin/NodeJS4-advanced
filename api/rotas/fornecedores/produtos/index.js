@@ -36,15 +36,19 @@ roteador.delete('/:id', async (requisicao, resposta) => {
 })
 
 roteador.get('/:id', async(requisicao, resposta) => { //apenas 1 produto entao url com id do produto
-    const dados = {
-        id: requisicao.params.id,
-        fornecedor: requisicao.fornecedor.id
+    try{
+        const dados = {
+            id: requisicao.params.id,
+            fornecedor: requisicao.fornecedor.id
+        }
+        const produto = new Produto(dados) //instancia o produto
+        await produto.carregar()
+        resposta.send (
+            JSON.stringify(produto)
+        )
+    } catch (erro){
+        
     }
-    const produto = new Produto(dados) //instancia o produto
-    await produto.carregar()
-    resposta.send (
-        JSON.stringify(produto)
-    )
 })
 
 const roteadorReclamacoes = require('./reclamacoes')
