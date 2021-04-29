@@ -41,6 +41,10 @@ roteador.get('/:id', async(requisicao, resposta) => { //apenas 1 produto entao u
         fornecedor: requisicao.fornecedor.id
     }
     const produto = new Produto(dados) //instancia o produto
+    await produto.carregar()
+    resposta.send (
+        JSON.stringify(produto)
+    )
 })
 
 const roteadorReclamacoes = require('./reclamacoes')
