@@ -35,6 +35,13 @@ roteador.delete('/:id', async (requisicao, resposta) => {
     resposta.end()
 })
 
+roteador.get('/:id', async(requisicao, resposta) => { //apenas 1 produto entao url com id do produto
+    const dados = {
+        id: requisicao.params.id,
+        fornecedor: requisicao.fornecedor.id
+    }
+    const produto = new Produto(dados) //instancia o produto
+})
 
 const roteadorReclamacoes = require('./reclamacoes')
 roteador.use('/:idProduto/reclamacoes', roteadorReclamacoes)
