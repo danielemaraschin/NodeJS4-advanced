@@ -47,7 +47,7 @@ roteador.get('/:id', async(requisicao, resposta) => { //apenas 1 produto entao u
             JSON.stringify(produto)
         )
     } catch (erro){
-        
+        proximo(erro)
     }
 })
 
