@@ -39,6 +39,15 @@ class Produto {
     apagar() { //se comunica com o DAO que é a tabelaProduto para poder remover o produto indicado
         return Tabela.remover(this.id, this.fornecedor)
     }
+
+    async carregar () {
+        const produto = await Tabela.pegarPorId(this.id, this.fornecedor)
+        this.titulo = produto.titulo
+        this.preco = produto.preco
+        this.dataCriacao = produto.dataCriacao
+        this.dataAtualizacao = produto.dataAtualizacao
+        this.versao = produto.versao
+    }
 }
 
 module.exports = Produto
