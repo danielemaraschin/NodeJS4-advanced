@@ -20,7 +20,17 @@ module.exports = {
                 fornecedor: idFornecedor
             }
         })
+    },
+    async pegarPorId (idProduto, idFornecedor){
+        const encontrado = await Modelo.findOne({
+            where: {
+                id: idProduto,
+                fornecedor: idFornecedor
+            }
+        })
+        if(!encontrado){
+            throw new Error('Produto não foi encontrado!')
+        }
     }
-}
 
 //DAO
