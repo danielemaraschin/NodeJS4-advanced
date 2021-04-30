@@ -6,7 +6,6 @@ const SerializadorProduto = require('../../../Serializador').SerializadorProduto
 
 roteador.get('/', async(requisicao, resposta) => { //listagem de produtos
     const produtos = await Tabela.listar(requisicao.fornecedor.id) //fornecedor.id é a instancia já injetada na rota fornecedores
-    resposta.status(200)
     const serializador = new Serializador( //instancía o serializador
         resposta.getHeader('Content-Type')
     )

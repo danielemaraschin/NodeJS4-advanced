@@ -6,7 +6,8 @@ module.exports = {
         return Modelo.findAll({ // queremos somente os produtos de um determinado fornecedor
             where: {        //passa um objeto 'where'e dentro as intruções para encontrar o produto
                 fornecedor: idFornecedor//campo fornecedor do produto deve ser igual ao idFornecedor do fornecedor
-            }
+            }, 
+            raw: true //queremos os valor em js puro, nao como metodo do sequelize
         })
     }, 
     inserir (dados) {

@@ -98,7 +98,6 @@ class SerializadorProduto extends Serializador {
         this.tagSingular = 'produto'
         this.tagPlural = 'produtos'
     }
-
 }
 
 module.exports = {
