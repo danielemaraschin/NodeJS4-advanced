@@ -35,7 +35,7 @@ roteador.delete('/:id', async (requisicao, resposta) => {
     resposta.end()
 })
 
-roteador.get('/:id', async(requisicao, resposta) => { //apenas 1 produto entao url com id do produto
+roteador.get('/:id', async (requisicao, resposta, proximo) => { //apenas 1 produto entao url com id do produto
     try{
         const dados = {
             id: requisicao.params.id,
@@ -43,10 +43,10 @@ roteador.get('/:id', async(requisicao, resposta) => { //apenas 1 produto entao u
         }
         const produto = new Produto(dados) //instancia o produto
         await produto.carregar()
-        resposta.send (
+        resposta.send(
             JSON.stringify(produto)
         )
-    } catch (erro){
+    } catch (erro) {
         proximo(erro)
     }
 })

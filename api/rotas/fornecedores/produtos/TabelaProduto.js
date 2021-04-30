@@ -32,6 +32,8 @@ module.exports = {
         if(!encontrado){
             throw new Error('Produto não foi encontrado!')
         }
+
+        return encontrado
     }
 
-//DAO
+} /*DAO */
