@@ -22,8 +22,12 @@ roteador.post('/', async (requisicao, resposta, proximo) => {
         const dados = Object.assign({}, corpo, {fornecedor: idFornecedor}) //temos a coluna fornecedor na tb produtos
         const produto = new Produto(dados)    //instanciar a classe produto
         await produto.criar()
+        const serializador = new Serializador( //instancía o serializador
+            resposta.getHeader('Content-Type')
+        )
         resposta.status(201)
-        resposta.send(produto)
+        resposta.send(
+            serializador.serializar(produto)
 
     } catch(erro) {
         proximo(erro)
