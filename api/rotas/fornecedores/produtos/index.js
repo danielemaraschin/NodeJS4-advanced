@@ -1,15 +1,20 @@
 const roteador = require('express').Router({ mergeParams: true }) //merge = junta os parametros que ta nivel acima com o roteador daqui 
 const Tabela = require('./TabelaProduto')
 const Produto = require('./Produto') //chamar a classe
-const SerializadorProduto = require('../../../Serializador').SerializadorProduto
+const SerializadorProduto = require('../../../Serializador').SerializadorProduto //apenas a classe serializadorProdutos
 
 
-roteador.get('/', async(requisicao, resposta) => {
+roteador.get('/', async(requisicao, resposta) => { //listagem de produtos
     const produtos = await Tabela.listar(requisicao.fornecedor.id) //fornecedor.id é a instancia já injetada na rota fornecedores
+    resposta.status(200)
+    const serializador = new Serializador( //instancía o serializador
+        resposta.getHeader('Content-Type')
+    )
     resposta.send(
-        JSON.stringify(produtos)
+        serializador.serializar(produtos) //serializador já está instanciado por isso pode chamar aqui
     )
 })
+
 // Vamos trabalhar na raiz da requisicao por isso '/' //PROXIMO é o midleware
 roteador.post('/', async (requisicao, resposta, proximo) => {
     try{
@@ -54,6 +59,7 @@ roteador.get('/:id', async (requisicao, resposta, proximo) => { //apenas 1 produ
 })
 
 const roteadorReclamacoes = require('./reclamacoes')
+const Serializador = require('../../../Serializador')
 roteador.use('/:idProduto/reclamacoes', roteadorReclamacoes)
 
 module.exports = roteador
