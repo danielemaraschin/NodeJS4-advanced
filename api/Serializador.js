@@ -94,7 +94,10 @@ class SerializadorProduto extends Serializador {
         this.camposPublicos = [
             'id',
             'titulo'
-        ].concat(camposExtras || [])
+        ].concat(camposExtras || []) //se nao precisar dos cmpos extras concat com lista vazia
+        this.tagSingular = 'produto'
+        this.tagPlural = 'produtos'
+    }
 
 }
 
@@ -102,6 +105,6 @@ module.exports = {
     Serializador: Serializador,
     SerializadorFornecedor: SerializadorFornecedor,
     SerializadorErro: SerializadorErro,
-    SerializadorProduto:SerializadorProduto,
+    SerializadorProduto: SerializadorProduto,
     formatosAceitos: ['application/json', 'application/xml']
 }
