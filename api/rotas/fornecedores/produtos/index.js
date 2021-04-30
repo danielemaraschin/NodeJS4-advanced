@@ -1,6 +1,8 @@
 const roteador = require('express').Router({ mergeParams: true }) //merge = junta os parametros que ta nivel acima com o roteador daqui 
 const Tabela = require('./TabelaProduto')
 const Produto = require('./Produto') //chamar a classe
+const SerializadorProduto = require('../../../Serializador').SerializadorProduto
+
 
 roteador.get('/', async(requisicao, resposta) => {
     const produtos = await Tabela.listar(requisicao.fornecedor.id) //fornecedor.id é a instancia já injetada na rota fornecedores
