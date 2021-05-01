@@ -39,7 +39,7 @@ class Serializador {
         const novoObjeto = {}
 
         this.camposPublicos.forEach((campo) => {
-            if (dados.hasOwnProperty(campo)) {
+            if (dados.hasOwnProperty(campo)) { //funcão pronta que retorna v/f - pergunta se 'dados' tem os campos publicos (campo por campo)
                 novoObjeto[campo] = dados[campo]
             }
         })
