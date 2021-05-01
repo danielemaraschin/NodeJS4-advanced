@@ -4,7 +4,7 @@ const Produto = require('./Produto') //chamar a classe
 const SerializadorProduto = require('../../../Serializador').SerializadorProduto //apenas a classe serializadorProdutos
 
 
-roteador.get('/', async(requisicao, resposta) => { //listagem de produtos
+roteador.get('/', async (requisicao, resposta) => { //listagem de produtos
     const produtos = await Tabela.listar(requisicao.fornecedor.id) //fornecedor.id é a instancia já injetada na rota fornecedores
     const serializador = new SerializadorProduto( //instancía o serializador
         resposta.getHeader('Content-Type')
@@ -16,10 +16,10 @@ roteador.get('/', async(requisicao, resposta) => { //listagem de produtos
 
 // Vamos trabalhar na raiz da requisicao por isso '/' //PROXIMO é o midleware
 roteador.post('/', async (requisicao, resposta, proximo) => {
-    try{
+    try {
         const idFornecedor = requisicao.fornecedor.id
         const corpo = requisicao.body
-        const dados = Object.assign({}, corpo, {fornecedor: idFornecedor}) //temos a coluna fornecedor na tb produtos
+        const dados = Object.assign({}, corpo, { fornecedor: idFornecedor }) //temos a coluna fornecedor na tb produtos
         const produto = new Produto(dados)    //instanciar a classe produto
         await produto.criar()
         const serializador = new SerializadorProduto( //instancía o serializador
@@ -29,15 +29,15 @@ roteador.post('/', async (requisicao, resposta, proximo) => {
         resposta.send(
             serializador.serializar(produto)
         )
-    } catch(erro) {
+    } catch (erro) {
         proximo(erro)
-    } 
- })
+    }
+})
 
 roteador.delete('/:id', async (requisicao, resposta) => {
     const dados = {             //dados que temos nesse momento
         id: requisicao.params.id,
-        fornecedor:requisicao.fornecedor.id //fornecedor.id é a instancia já injetada na rota fornecedores
+        fornecedor: requisicao.fornecedor.id //fornecedor.id é a instancia já injetada na rota fornecedores
     }
     const produto = new Produto(dados) //instanciar a classe
     await produto.apagar() //espera terminar de executar a funcao para apagar
@@ -46,7 +46,7 @@ roteador.delete('/:id', async (requisicao, resposta) => {
 })
 
 roteador.get('/:id', async (requisicao, resposta, proximo) => { //apenas 1 produto entao url com id do produto
-    try{
+    try {
         const dados = {
             id: requisicao.params.id,
             fornecedor: requisicao.fornecedor.id
@@ -55,7 +55,7 @@ roteador.get('/:id', async (requisicao, resposta, proximo) => { //apenas 1 produ
         await produto.carregar()
         const serializador = new SerializadorProduto(
             resposta.getHeader('Content-Type'),
-            ['preco', 'estoque','fornecedor', 'dataCriacao', 'dataAtualizacao', 'versao' ]
+            ['preco', 'estoque', 'fornecedor', 'dataCriacao', 'dataAtualizacao', 'versao']
         )
         resposta.send(
             serializador.serializar(produto)
@@ -64,6 +64,20 @@ roteador.get('/:id', async (requisicao, resposta, proximo) => { //apenas 1 produ
         proximo(erro)
     }
 })
+
+roteador.put('/:id', async (requisicao, resposta) => {
+    const dados = Object.assign(//object.assign juntar 2 objetos, o q já temos e as novas informações vinda da requisicao para atualizar esse objeto
+        {},
+        requisicao.body, //corpo da requisicao
+        {
+            id: requisicao.params.id, //declarado na rota
+            fornecedor: requisicao.fornecedor.id //id fornecedor  
+        }
+    ) 
+    
+    const produto = new Produto(dados)
+})
+
 
 const roteadorReclamacoes = require('./reclamacoes')
 const Serializador = require('../../../Serializador')
