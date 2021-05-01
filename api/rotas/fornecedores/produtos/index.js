@@ -58,7 +58,7 @@ roteador.get('/:id', async (requisicao, resposta, proximo) => { //apenas 1 produ
             ['preco', 'estoque','fornecedor', 'dataCriacao', 'dataAtualizacao', 'versao' ]
         )
         resposta.send(
-            JSON.stringify(produto)
+            serializador.serializar(produto)
         )
     } catch (erro) {
         proximo(erro)
