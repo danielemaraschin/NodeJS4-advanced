@@ -6,7 +6,7 @@ const SerializadorProduto = require('../../../Serializador').SerializadorProduto
 
 roteador.get('/', async(requisicao, resposta) => { //listagem de produtos
     const produtos = await Tabela.listar(requisicao.fornecedor.id) //fornecedor.id é a instancia já injetada na rota fornecedores
-    const serializador = new Serializador( //instancía o serializador
+    const serializador = new SerializadorProduto( //instancía o serializador
         resposta.getHeader('Content-Type')
     )
     resposta.send(
@@ -22,7 +22,7 @@ roteador.post('/', async (requisicao, resposta, proximo) => {
         const dados = Object.assign({}, corpo, {fornecedor: idFornecedor}) //temos a coluna fornecedor na tb produtos
         const produto = new Produto(dados)    //instanciar a classe produto
         await produto.criar()
-        const serializador = new Serializador( //instancía o serializador
+        const serializador = new SerializadorProduto( //instancía o serializador
             resposta.getHeader('Content-Type')
         )
         resposta.status(201)
@@ -53,6 +53,10 @@ roteador.get('/:id', async (requisicao, resposta, proximo) => { //apenas 1 produ
         }
         const produto = new Produto(dados) //instancia o produto
         await produto.carregar()
+        const serializador = new SerializadorProduto(
+            resposta.getHeader('Content-Type'),
+            
+        )
         resposta.send(
             JSON.stringify(produto)
         )
