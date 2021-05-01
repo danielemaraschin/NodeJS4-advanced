@@ -54,8 +54,7 @@ roteador.get('/:id', async (requisicao, resposta, proximo) => { //apenas 1 produ
         const produto = new Produto(dados) //instancia o produto
         await produto.carregar()
         const serializador = new SerializadorProduto(
-            resposta.getHeader('Content-Type'),
-            
+            resposta.getHeader('Content-Type')
         )
         resposta.send(
             JSON.stringify(produto)
