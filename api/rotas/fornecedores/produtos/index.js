@@ -28,7 +28,7 @@ roteador.post('/', async (requisicao, resposta, proximo) => {
         resposta.status(201)
         resposta.send(
             serializador.serializar(produto)
-
+        )
     } catch(erro) {
         proximo(erro)
     } 

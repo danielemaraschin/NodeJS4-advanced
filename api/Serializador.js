@@ -95,7 +95,7 @@ class SerializadorProduto extends Serializador {
             'id',
             'titulo'
         ].concat(camposExtras || []) //se nao precisar dos cmpos extras concat com lista vazia
-        this.tagSingular = 'produto'
+        this.tagSingular = 'produto'//tags do xml
         this.tagPlural = 'produtos'
     }
 }
