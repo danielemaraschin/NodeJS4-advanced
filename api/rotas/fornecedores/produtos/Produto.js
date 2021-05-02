@@ -40,13 +40,19 @@ class Produto {
         return Tabela.remover(this.id, this.fornecedor)
     }
 
-    async carregar () {
+    async carregar() {
         const produto = await Tabela.pegarPorId(this.id, this.fornecedor)
         this.titulo = produto.titulo
         this.preco = produto.preco
         this.dataCriacao = produto.dataCriacao
         this.dataAtualizacao = produto.dataAtualizacao
         this.versao = produto.versao
+    }
+
+    atualizar () {
+        const dadosParaAtualizar = {
+            
+        }
     }
 }
 
