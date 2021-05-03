@@ -35,6 +35,17 @@ module.exports = {
         }
 
         return encontrado
+    },
+
+    atualizar (dadosDoProduto, dadosParaAtualizar) {
+        return Modelo.update(//metodo sequelize para atualizar um documento do sequelize. e usamos o modelo sequelize
+            dadosParaAtualizar,
+            {
+                where: dadosDoProduto //objeto 
+            }
+
+        ) //metodo sequelize para atualizar um documento
+
     }
 
 } /*DAO */

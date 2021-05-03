@@ -65,17 +65,22 @@ roteador.get('/:id', async (requisicao, resposta, proximo) => { //apenas 1 produ
     }
 })
 
-roteador.put('/:id', async (requisicao, resposta) => {
-    const dados = Object.assign(//object.assign juntar 2 objetos, o q já temos e as novas informações vinda da requisicao para atualizar esse objeto
-        {},
-        requisicao.body, //corpo da requisicao
-        {
-            id: requisicao.params.id, //declarado na rota
-            fornecedor: requisicao.fornecedor.id //id fornecedor  
-        }
-    ) 
-    
-    const produto = new Produto(dados)
+roteador.put('/:id', async (requisicao, resposta, proximo) => {
+    try{
+        const dados = Object.assign(//object.assign juntar 2 objetos, o q já temos e as novas informações vinda da requisicao para atualizar esse objeto
+            {},
+            requisicao.body, //corpo da requisicao
+            {
+                id: requisicao.params.id, //declarado na rota
+                fornecedor: requisicao.fornecedor.id //id fornecedor  
+            }
+        ) 
+        
+        const produto = new Produto(dados)
+        await produto.atualizar()
+    }catch (erro){
+        proximo(erro)
+    }
 })
 
 
