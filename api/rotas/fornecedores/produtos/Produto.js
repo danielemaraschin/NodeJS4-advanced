@@ -50,8 +50,16 @@ class Produto {
     }
 
     atualizar () {
-        const dadosParaAtualizar = {
-            
+        const dadosParaAtualizar = {       }
+
+        if (typeof this.titulo === 'string' || this.titulo.length > 0) {
+            dadosParaAtualizar.titulo = this.titulo
+        }           //no js seja com ponto flutuante ou nao, o typeof é 'number'
+        if (typeof this.preco === 'number' || this.preco > 0) {
+            dadosParaAtualizar.preco = this.preco
+        }
+        if (typeof this.estoque === 'number' || this.estoque >=  0){
+            dadosParaAtualizar.estoque = this.estoque
         }
     }
 }
