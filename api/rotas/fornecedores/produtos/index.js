@@ -79,6 +79,7 @@ roteador.put('/:id', async (requisicao, resposta, proximo) => {
         const produto = new Produto(dados)
         await produto.atualizar()
         resposta.status(204)
+        resposta.end()
     }catch (erro){
         proximo(erro)
     }
