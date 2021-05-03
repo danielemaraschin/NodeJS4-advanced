@@ -50,24 +50,24 @@ class Produto {
     }
 
     atualizar () {
-        const dadosParaAtualizar = {       }
+        const dadosParaAtualizar = {}
 
-        if (typeof this.titulo === 'string' || this.titulo.length > 0) {
+        if (typeof this.titulo === 'string' && this.titulo.length > 0){
             dadosParaAtualizar.titulo = this.titulo
         }           //no js seja com ponto flutuante ou nao, o typeof é 'number'
-        if (typeof this.preco === 'number' || this.preco > 0) {
+        if (typeof this.preco === 'number' && this.preco > 0) {
             dadosParaAtualizar.preco = this.preco
         }
         if (typeof this.estoque === 'number'){
             dadosParaAtualizar.estoque = this.estoque
         }
-        if(Object.keys(dadosParaAtualizar).length === 0) {
+        if (Object.keys(dadosParaAtualizar).length === 0) {
             throw new Error('Não foram fornecidos dados para atualizar')
         }
         return Tabela.atualizar(
             {
                 id: this.id,
-                fornecedor: this.fornecedor
+                fornecedor: this.fornecedor //obeto para encontrar o produto pra atualizar
             },
             dadosParaAtualizar
         )
