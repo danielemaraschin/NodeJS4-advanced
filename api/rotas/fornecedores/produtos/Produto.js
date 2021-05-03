@@ -43,6 +43,7 @@ class Produto {
     async carregar() {
         const produto = await Tabela.pegarPorId(this.id, this.fornecedor)
         this.titulo = produto.titulo
+        this.estoque = produto.estoque
         this.preco = produto.preco
         this.dataCriacao = produto.dataCriacao
         this.dataAtualizacao = produto.dataAtualizacao
