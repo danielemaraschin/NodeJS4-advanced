@@ -85,7 +85,7 @@ roteador.put('/:id', async (requisicao, resposta, proximo) => {
     }
 })
 
-roteador.post('/:id/diminuir-estoque', async (requisicao, resposta) => {
+roteador.post('/:id/diminuir-estoque', async (requisicao, resposta, proximo) => {
     const produto = new Produto({
     id: requisicao.params.id,      
     fornecedor: requisicao.fornecedor.id
