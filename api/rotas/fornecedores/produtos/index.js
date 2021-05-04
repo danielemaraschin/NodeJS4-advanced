@@ -66,7 +66,7 @@ roteador.get('/:id', async (requisicao, resposta, proximo) => { //apenas 1 produ
 })
 
 roteador.put('/:id', async (requisicao, resposta, proximo) => {
-    try{
+    try {
         const dados = Object.assign(//object.assign juntar 2 objetos, o q já temos e as novas informações vinda da requisicao para atualizar esse objeto
             {},
             requisicao.body, //corpo da requisicao
@@ -74,23 +74,28 @@ roteador.put('/:id', async (requisicao, resposta, proximo) => {
                 id: requisicao.params.id, //declarado na rota
                 fornecedor: requisicao.fornecedor.id //id fornecedor  
             }
-        ) 
-        
+        )
+
         const produto = new Produto(dados)
         await produto.atualizar()
         resposta.status(204)
         resposta.end()
-    }catch (erro){
+    } catch (erro) {
         proximo(erro)
     }
 })
 
 roteador.post('/:id/diminuir-estoque', async (requisicao, resposta, proximo) => {
-    const produto = new Produto({
-    id: requisicao.params.id,      
-    fornecedor: requisicao.fornecedor.id
-    })
-    await produto.carregar()
+    try {
+        const produto = new Produto({
+            id: requisicao.params.id,
+            fornecedor: requisicao.fornecedor.id
+        })
+        await produto.carregar()
+
+    }catch(erro){
+        proximo(erro)
+    }
 })
 
 const roteadorReclamacoes = require('./reclamacoes')
