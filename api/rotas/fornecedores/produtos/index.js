@@ -85,6 +85,13 @@ roteador.put('/:id', async (requisicao, resposta, proximo) => {
     }
 })
 
+roteador.post('/:id/diminuir-estoque', async (requisicao, resposta) => {
+    const produto = new Produto({
+    id: requisicao.params.id,      
+    fornecedor: requisicao.fornecedor.id
+    })
+    await produto.carregar()
+})
 
 const roteadorReclamacoes = require('./reclamacoes')
 const Serializador = require('../../../Serializador')
