@@ -92,7 +92,7 @@ roteador.post('/:id/diminuir-estoque', async (requisicao, resposta, proximo) => 
             fornecedor: requisicao.fornecedor.id
         })
         await produto.carregar()
-
+        produto.estoque = produto.estoque - requisicao.body.quantidade
     }catch(erro){
         proximo(erro)
     }
