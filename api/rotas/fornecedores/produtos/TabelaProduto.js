@@ -1,3 +1,4 @@
+const instancia = require('../../../banco-de-dados')
 const Modelo = require('./ModeloTabelaProduto') //esse Modelo do sequelize para se comunicar com o db
 
 
@@ -49,7 +50,21 @@ module.exports = {
     },
 
     subtrair(idProduto, idFornecedor, campo, quantidade){
+        return instancia.transaction( async transacao => {
+            const produto = await Modelo.findOne({
+                where: {
+                    id: idProduto,
+                    fornecedor: idFornecedor
+                }
+            })
+            produto[campo] = quantidade
+
+            await produto.save() // pede pro sequelize salvar esse 'produto'no banco de dados (o novo valor)
+            return produto
+        })
         
+
+
     }
 
 } /*DAO */
