@@ -46,6 +46,10 @@ module.exports = {
 
         ) //metodo sequelize para atualizar um documento
 
+    },
+
+    subtrair(idProduto, idFornecedor, campo, quantidade){
+        
     }
 
 } /*DAO */
