@@ -62,9 +62,6 @@ module.exports = {
             await produto.save() // pede pro sequelize salvar esse 'produto'no banco de dados (o novo valor)
             return produto
         })
-        
-
-
     }
 
 } /*DAO */
