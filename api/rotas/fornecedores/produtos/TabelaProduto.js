@@ -1,6 +1,7 @@
 const instancia = require('../../../banco-de-dados')
 const Modelo = require('./ModeloTabelaProduto') //esse Modelo do sequelize para se comunicar com o db
 
+
 module.exports = {
     listar(idFornecedor, criterios) { //retorna nossa lista de produtos - mas nao queremos a lista inteira
         criterios.fornecedor = idFornecedor
