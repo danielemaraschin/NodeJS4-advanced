@@ -2,6 +2,7 @@ const roteador = require('express').Router()
 const TabelaFornecedor = require('./TabelaFornecedor')
 const Fornecedor = require('./Fornecedor')
 const SerializadorFornecedor = require('../../Serializador').SerializadorFornecedor
+const TabelaProduto = require('./produtos/TabelaProduto')
 
 roteador.get('/', async (requisicao, resposta) => {
     console.log('Im in index fornecedores');
