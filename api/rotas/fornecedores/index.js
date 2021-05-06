@@ -84,7 +84,10 @@ roteador.post('/:idFornecedor/repor-estoque', async (requisicao, resposta, proxi
     try {
         const fornecedor = new Fornecedor({ id: requisicao.params.idFornecedor })
         await fornecedor.carregar()     
-        resposta.status(201)
+        const produtos = await TabelaProduto.listar(fornecedor.id, { estoque: 0} )
+        resposta.send({
+            mensagem: `${produtos.length} precisam de reposição de estoque`
+        })
     } catch (erro) {
         proximo(erro)
     }
