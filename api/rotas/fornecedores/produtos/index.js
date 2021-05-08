@@ -25,6 +25,8 @@ roteador.post('/', async (requisicao, resposta, proximo) => {
         const serializador = new SerializadorProduto( //instancía o serializador
             resposta.getHeader('Content-Type')
         )
+        resposta.set('Etag', produto.versao) //enviar o nome da tag e a versao pro cliente
+     
         resposta.status(201)
         resposta.send(
             serializador.serializar(produto)
