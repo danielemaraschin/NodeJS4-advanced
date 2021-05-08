@@ -5,6 +5,8 @@ const Modelo = require('./ModeloTabelaProduto') //esse Modelo do sequelize para 
 module.exports = {
     listar(idFornecedor, criterios) { //retorna nossa lista de produtos - mas nao queremos a lista inteira
         criterios.fornecedor = idFornecedor
+        //criterios.fornecedor  : "o id do fornecedor
+        //criterios.estoque     : 0
         return Modelo.findAll({ // queremos somente os produtos de um determinado fornecedor
             where: criterios,       //passa um objeto 'where'e dentro as intruções para encontrar o produto
             raw: true //queremos os valor em js puro, nao como metodo do sequelize
