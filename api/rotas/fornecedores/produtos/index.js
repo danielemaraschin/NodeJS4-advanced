@@ -26,9 +26,9 @@ roteador.post('/', async (requisicao, resposta, proximo) => {
         const serializador = new SerializadorProduto( //instancía o serializador
             resposta.getHeader('Content-Type')
         )
-        resposta.set('Etag', produto.versao) //enviar o nome da tag e a versao pro cliente
-        const timestamp = (new Date(produto.dataAtualizacao)).getTime()
-        resposta.set('Last-Modified',timestamp)
+        resposta.set('Etag', produto.versao) //enviar o nome da tag e a versao pro cliente ja que ele esta cadastrando 
+        const timestamp = (new Date(produto.dataAtualizacao)).getTime() //data da ultima alteração/cadastro desse produto mas tem q converter em new date do JS
+        resposta.set('Last-Modified', timestamp) //GET TIME é a funcao do js que converte a string 'produto.dataAtualizacao'
         resposta.set('Location', `/api/fornecedores/${produto.fornecedor}/produtos/${produto.id}`)
         resposta.status(201)
         resposta.send(
