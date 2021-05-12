@@ -90,6 +90,10 @@ roteador.put('/:id', async (requisicao, resposta, proximo) => {
 
         const produto = new Produto(dados)
         await produto.atualizar()
+        await produto.carregar()//como esta alterando o produto tem q carregar de novo para mostrar a nova data com a data do momento em q está fazendo essa modificacao
+        resposta.set('Etag', produto.versao) //enviar o nome da tag e a versao pro cliente
+        const timestamp = (new Date(produto.dataAtualizacao)).getTime()
+        resposta.set('Last-Modified',timestamp)
         resposta.status(204)
         resposta.end()
     } catch (erro) {
@@ -106,6 +110,10 @@ roteador.post('/:id/diminuir-estoque', async (requisicao, resposta, proximo) => 
         await produto.carregar()
         produto.estoque = produto.estoque - requisicao.body.quantidade
         await produto.diminuirEstoque()
+        await produto.carregar() //como esta alterando o produto tem q carregar de novo para mostrar a nova data com a data do momento em q está fazendo essa modificacao
+        resposta.set('Etag', produto.versao) //enviar o nome da tag e a versao pro cliente
+        const timestamp = (new Date(produto.dataAtualizacao)).getTime()
+        resposta.set('Last-Modified',timestamp)
         resposta.status(204) // nao precisa mandar nenhuma respota
         resposta.end() // entao ja manda finalizar a requisicao 
     }catch(erro){
