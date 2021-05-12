@@ -62,6 +62,13 @@ roteador.get('/:id', async (requisicao, resposta, proximo) => { //apenas 1 produ
             resposta.getHeader('Content-Type'),
             ['preco', 'estoque', 'fornecedor', 'dataCriacao', 'dataAtualizacao', 'versao']
         )
+        resposta.set('Etag', produto.versao) //enviar o nome da tag e a versao pro cliente
+        const timestamp = (new Date(produto.dataAtualizacao)).getTime()
+        resposta.set('Last-Modified',timestamp)
+        resposta.status(201)
+        resposta.send(
+            serializador.serializar(produto)
+        )
         resposta.send(
             serializador.serializar(produto)
         )
