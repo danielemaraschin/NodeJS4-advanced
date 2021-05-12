@@ -81,7 +81,7 @@ roteador.delete('/:idFornecedor', async (requisicao, resposta, proximo) => {
 })
 
 //
-roteador.post('/:idFornecedor/repor-estoque', async (requisicao, resposta, proximo) => {
+/*roteador.post('/:idFornecedor/repor-estoque', async (requisicao, resposta, proximo) => {
     try {
         const fornecedor = new Fornecedor({ id: requisicao.params.idFornecedor })
         await fornecedor.carregar()
@@ -94,8 +94,8 @@ roteador.post('/:idFornecedor/repor-estoque', async (requisicao, resposta, proxi
         proximo(erro)
     }
 })
-
-/*arquivo de rotas dos fornecedores*/
+*/
+//arquivo de rotas dos fornecedores
 const roteadorProdutos = require('./produtos')
 const verificarFornecedor = async (requisicao, resposta, proximo) => {
     try {
