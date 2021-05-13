@@ -28,6 +28,11 @@ app.use((requisicao, resposta, proximo) => {
     proximo()
 })
 
+app.use((requisicao, resposta, proximo) => { //param 1 : nome header/[param2]:nome do site por qual está tentando aceitar
+    resposta.set('Access-Control-Allow-Origin', 'https://developer.mozilla.org') //nao colocar / no final do dominio
+    proximo()
+})
+
 const roteador = require('./rotas/fornecedores')
 app.use('/api/fornecedores', roteador)
 
