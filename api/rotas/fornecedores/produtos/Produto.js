@@ -1,5 +1,6 @@
 const Tabela = require('./TabelaProduto')
 const DadosNaoFornecidos = require('../../../erros/DadosNaoFornecidos')
+const CampoInvalido = require('../../../erros/CampoInvalido')
 
 class Produto {
     //constructor pega dados que recebemos e passa para uma instancia 
