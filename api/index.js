@@ -58,4 +58,9 @@ app.use((erro, requisicao, resposta, proximo) => {
     )
 })
 
+app.use(( requisicao, resposta, proximo) => {
+    resposta.set('X-Powered-By', 'Maraschin,D')
+    proximo()
+})
+
 app.listen(3000, () => console.log('A API está funcionando!'))
