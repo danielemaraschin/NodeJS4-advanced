@@ -64,7 +64,7 @@ class Produto {
             dadosParaAtualizar.estoque = this.estoque
         }
         if (Object.keys(dadosParaAtualizar).length === 0) {
-            throw new DadosNaoFornecidos('Não foram fornecidos dados para atualizar')
+            throw new DadosNaoFornecidos() //SEM nada nos parenteses do constructor desse error entao sem nada aqui nesses parenteses tb
         }
         return Tabela.atualizar(
             {
