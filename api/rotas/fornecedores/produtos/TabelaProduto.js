@@ -1,6 +1,6 @@
 const instancia = require('../../../banco-de-dados')
+const NaoEncontrado = require('../../../erros/NaoEncontrado')
 const Modelo = require('./ModeloTabelaProduto') //esse Modelo do sequelize para se comunicar com o db
-
 
 module.exports = {
     listar(idFornecedor) { //retorna nossa lista de produtos - mas nao queremos a lista inteira
@@ -33,7 +33,7 @@ module.exports = {
             raw: true //para não retornar com todos os métodos do sequelize(pq estamos usando uma instancia do sequelize)
         })          //para voltar um objeto puro
         if(!encontrado){
-            throw new Error('Produto não foi encontrado!')
+            throw new NaoEncontrado('Produto')
         }
 
         return encontrado
