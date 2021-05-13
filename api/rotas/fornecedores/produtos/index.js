@@ -68,10 +68,26 @@ roteador.get('/:id', async (requisicao, resposta, proximo) => { //apenas 1 produ
         resposta.status(201)
         resposta.send(
             serializador.serializar(produto)
+
         )
-        resposta.send(
-            serializador.serializar(produto)
-        )
+    } catch (erro) {
+        proximo(erro)
+    }
+})
+
+roteador.head('/:id', async (requisicao, resposta, proximo) => { //apenas 1 produto entao url com id do produto
+    try {
+        const dados = {
+            id: requisicao.params.id,
+            fornecedor: requisicao.fornecedor.id
+        }
+        const produto = new Produto(dados) //instancia o produto
+        await produto.carregar()
+        resposta.set('Etag', produto.versao) //enviar o nome da tag e a versao pro cliente
+        const timestamp = (new Date(produto.dataAtualizacao)).getTime()
+        resposta.set('Last-Modified',timestamp)
+        resposta.status(200)
+        resposta.end() //encerra a requisicao sem mandar nada na resposta
     } catch (erro) {
         proximo(erro)
     }
