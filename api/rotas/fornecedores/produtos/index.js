@@ -87,7 +87,7 @@ roteador.head('/:id', async (requisicao, resposta, proximo) => { //apenas 1 prod
         const timestamp = (new Date(produto.dataAtualizacao)).getTime()
         resposta.set('Last-Modified',timestamp)
         resposta.status(200)
-        resposta.end() //encerra a requisicao sem mandar nada na resposta
+        resposta.end() //encerra a requisicao sem mandar nada na resposta pq so queremos os cabeçalho mesmo
     } catch (erro) {
         proximo(erro)
     }
