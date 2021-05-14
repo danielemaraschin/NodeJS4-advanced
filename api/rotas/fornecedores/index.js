@@ -4,8 +4,8 @@ const Fornecedor = require('./Fornecedor')
 const SerializadorFornecedor = require('../../Serializador').SerializadorFornecedor
 //const TabelaProduto = require('./produtos/TabelaProduto')
 
-roteador.options('/', (requisicao, resposta) => { //param 1 : nome header/[param2]:nome do site por qual está tentando aceitar, se for qualquer site colocar *
-    resposta.set('Access-Control-Allow-Methods', 'GET, POST') //Somente as rotas que trabalham na raiz da requisicao
+roteador.options('/', (requisicao, resposta) => { //param 1 : nome header/param2:allowed routes
+    resposta.set('Access-Control-Allow-Methods', 'GET, POST') //Somente as rotas que trabalham na raiz da requisicao (dominimo '/')
     resposta.status(204)                                                                    
     resposta.end()                          
 })
@@ -40,8 +40,8 @@ roteador.post('/', async (requisicao, resposta, proximo) => {
     }
 })
 
-roteador.options((requisicao, resposta) => { //param 1 : nome header/[param2]:nome do site por qual está tentando aceitar, se for qualquer site colocar *
-    resposta.set('Access-Control-Allow-Methods', 'GET, POST') //Somente as rotas que trabalham na raiz da requisicao
+roteador.options('/:id',(requisicao, resposta) => { //param 1 :HTTP headers/[param2]: ROUTES
+    resposta.set('Access-Control-Allow-Methods', 'GET, PUT, DELETE') //Somente as rotas que trabalham com o idFornecedor no dominimo
     resposta.status(204)                                                                    
     resposta.end()                          
 })
