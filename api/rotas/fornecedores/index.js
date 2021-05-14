@@ -4,13 +4,11 @@ const Fornecedor = require('./Fornecedor')
 const SerializadorFornecedor = require('../../Serializador').SerializadorFornecedor
 //const TabelaProduto = require('./produtos/TabelaProduto')
 
-roteador.options((requisicao, resposta) => { //param 1 : nome header/[param2]:nome do site por qual está tentando aceitar, se for qualquer site colocar *
+roteador.options('/', (requisicao, resposta) => { //param 1 : nome header/[param2]:nome do site por qual está tentando aceitar, se for qualquer site colocar *
     resposta.set('Access-Control-Allow-Methods', 'GET, POST') //Somente as rotas que trabalham na raiz da requisicao
     resposta.status(204)                                                                    
     resposta.end()                          
 })
-
-
 
 roteador.get('/', async (requisicao, resposta) => {
     console.log('Im in index fornecedores');
@@ -41,6 +39,13 @@ roteador.post('/', async (requisicao, resposta, proximo) => {
         proximo(erro)
     }
 })
+
+roteador.options((requisicao, resposta) => { //param 1 : nome header/[param2]:nome do site por qual está tentando aceitar, se for qualquer site colocar *
+    resposta.set('Access-Control-Allow-Methods', 'GET, POST') //Somente as rotas que trabalham na raiz da requisicao
+    resposta.status(204)                                                                    
+    resposta.end()                          
+})
+
 
 roteador.get('/:idFornecedor', async (requisicao, resposta, proximo) => {
     console.log('Im in idFornecedor');
