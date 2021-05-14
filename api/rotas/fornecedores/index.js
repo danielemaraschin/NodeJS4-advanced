@@ -40,7 +40,7 @@ roteador.post('/', async (requisicao, resposta, proximo) => {
     }
 })
 
-roteador.options('/:id',(requisicao, resposta) => { //param 1 :HTTP headers/[param2]: ROUTES
+roteador.options('/:idFornecedor', (requisicao, resposta) => { //param 1 :HTTP headers/[param2]: ROUTES
     resposta.set('Access-Control-Allow-Methods', 'GET, PUT, DELETE') //Somente as rotas que trabalham com o idFornecedor no dominimo
     resposta.status(204)                                                                    
     resposta.end()                          
