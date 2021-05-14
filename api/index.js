@@ -28,8 +28,8 @@ app.use((requisicao, resposta, proximo) => {
     proximo()
 })
 
-app.use((requisicao, resposta, proximo) => { //param 1 : nome header/[param2]:nome do site por qual está tentando aceitar
-    resposta.set('Access-Control-Allow-Origin', 'https://developer.mozilla.org') //nao colocar / no final do dominio
+app.use((requisicao, resposta, proximo) => { //param 1 : nome header/[param2]:nome do site por qual está tentando aceitar, se for qualquer site colocar *
+    resposta.set('Access-Control-Allow-Origin', '*') //nao colocar / no final do dominio
     proximo()
 })
 
