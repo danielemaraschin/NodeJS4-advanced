@@ -6,6 +6,7 @@ const SerializadorFornecedor = require('../../Serializador').SerializadorFornece
 
 roteador.options('/', (requisicao, resposta) => { //param 1 : nome header/param2:allowed routes
     resposta.set('Access-Control-Allow-Methods', 'GET, POST') //Somente as rotas que trabalham na raiz da requisicao (dominimo '/')
+    resposta.set('Access-Control-Allow-Headers', 'Content-Type')
     resposta.status(204)                                                                    
     resposta.end()                          
 })
@@ -42,6 +43,7 @@ roteador.post('/', async (requisicao, resposta, proximo) => {
 
 roteador.options('/:idFornecedor', (requisicao, resposta) => { //param 1 :HTTP headers/[param2]: ROUTES
     resposta.set('Access-Control-Allow-Methods', 'GET, PUT, DELETE') //Somente as rotas que trabalham com o idFornecedor no dominimo
+    resposta.set('Access-Control-Allow-Headers', 'Content-Type')
     resposta.status(204)                                                                    
     resposta.end()                          
 })
