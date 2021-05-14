@@ -3,6 +3,12 @@ const Tabela = require('./TabelaProduto')
 const Produto = require('./Produto') //chamar a classe
 const SerializadorProduto = require('../../../Serializador').SerializadorProduto //apenas a classe serializadorProdutos
 
+roteador.options('/', (requisicao, resposta) => { //param 1 : nome header/param2:allowed routes
+    resposta.set('Access-Control-Allow-Methods', 'GET, POST') //Somente as rotas que trabalham na raiz da requisicao (dominimo '/')
+    resposta.set('Access-Control-Allow-Headers', 'Content-Type')
+    resposta.status(204)                                                                    
+    resposta.end()                          
+})
 
 roteador.get('/', async (requisicao, resposta) => { //listagem de produtos
     console.log('Im in index produtos');
@@ -38,6 +44,14 @@ roteador.post('/', async (requisicao, resposta, proximo) => {
         proximo(erro)
     }
 })
+
+roteador.options('/:id', (requisicao, resposta) => { //param 1 :HTTP headers/[param2]: ROUTES
+    resposta.set('Access-Control-Allow-Methods', 'GET, PUT, DELETE, HEAD') //Somente as rotas que trabalham com o idFornecedor no dominimo
+    resposta.set('Access-Control-Allow-Headers', 'Content-Type')
+    resposta.status(204)                                                                    
+    resposta.end()                          
+})
+
 
 roteador.delete('/:id', async (requisicao, resposta) => {
     const dados = {             //dados que temos nesse momento
