@@ -46,8 +46,8 @@ roteador.post('/', async (requisicao, resposta, proximo) => {
 })
 
 roteador.options('/:id', (requisicao, resposta) => { //param 1 :HTTP headers/[param2]: ROUTES
-    resposta.set('Access-Control-Allow-Methods', 'GET, PUT, DELETE, HEAD') //Somente as rotas que trabalham com o idFornecedor no dominimo
-    resposta.set('Access-Control-Allow-Headers', 'Content-Type')
+    resposta.set('Access-Control-Allow-Methods', 'DELETE, GET,  HEAD, PUT') //Somente as rotas que trabalham com o id do produto
+    resposta.set('Access-Control-Allow-Headers', 'Content-Type') // param 1 : nome do header param2:conteudo do header
     resposta.status(204)                                                                    
     resposta.end()                          
 })
@@ -131,6 +131,16 @@ roteador.put('/:id', async (requisicao, resposta, proximo) => {
     }
 })
 
+
+roteador.options('/:id/diminuir-estoque', (requisicao, resposta) => { //param 1 :HTTP headers/[param2]: ROUTES
+    resposta.set('Access-Control-Allow-Methods', 'POST') //Somente as rotas que trabalham com o id do produto
+    resposta.set('Access-Control-Allow-Headers', 'Content-Type') // param 1 : nome do header param2:conteudo do header
+    resposta.status(204)                                                                    
+    resposta.end()                          
+})
+
+
+//a rota '/:id/diminuir-estoque é uma rota diferente entao tb precisamos definir o option separadamente para essa rota
 roteador.post('/:id/diminuir-estoque', async (requisicao, resposta, proximo) => {
     try {
         const produto = new Produto({
