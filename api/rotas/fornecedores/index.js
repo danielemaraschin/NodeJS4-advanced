@@ -17,7 +17,8 @@ roteador.get('/', async (requisicao, resposta) => {
     console.log('LISTANDO');
     resposta.status(200)
     const serializador = new SerializadorFornecedor(
-        resposta.getHeader('Content-Type')
+        resposta.getHeader('Content-Type'),
+        ['empresa']
     )
     resposta.send(
         serializador.serializar(resultados)
@@ -31,7 +32,8 @@ roteador.post('/', async (requisicao, resposta, proximo) => {
         await fornecedor.criar()
         resposta.status(201)
         const serializador = new SerializadorFornecedor(
-            resposta.getHeader('Content-Type')
+            resposta.getHeader('Content-Type'),
+            ['empresa']
         )
         resposta.send(
             serializador.serializar(fornecedor)
@@ -40,15 +42,12 @@ roteador.post('/', async (requisicao, resposta, proximo) => {
         proximo(erro)
     }
 })
-
 roteador.options('/:idFornecedor', (requisicao, resposta) => { //param 1 :HTTP headers/[param2]: ROUTES
     resposta.set('Access-Control-Allow-Methods', 'GET, PUT, DELETE') //Somente as rotas que trabalham com o idFornecedor no dominimo
     resposta.set('Access-Control-Allow-Headers', 'Content-Type')
     resposta.status(204)                                                                    
     resposta.end()                          
 })
-
-
 roteador.get('/:idFornecedor', async (requisicao, resposta, proximo) => {
     console.log('Im in idFornecedor');
     try {
@@ -58,7 +57,7 @@ roteador.get('/:idFornecedor', async (requisicao, resposta, proximo) => {
         resposta.status(200)
         const serializador = new SerializadorFornecedor(
             resposta.getHeader('Content-Type'),
-            ['email', 'dataCriacao', 'dataAtualizacao', 'versao']
+            ['email', 'empresa' ,'dataCriacao', 'dataAtualizacao', 'versao']
         )
         resposta.send(
             serializador.serializar(fornecedor)
