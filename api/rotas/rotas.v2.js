@@ -8,6 +8,13 @@ const SerializadorFornecedor = require('../../Serializador').SerializadorFornece
 //declarar as rotas atualizadas (CTRC+ CTRV GET)
 //queremos que a rota tenha a mesma funcionalidade que a rota antiga, so queremos que retorne campos diferentes
 
+roteador.options('/', (requisicao, resposta) => { //rota options pra dizer por qual rota podemos acessar com essa url
+    resposta.set('Access-Control-Allow-Methods', 'GET, POST') 
+    resposta.set('Access-Control-Allow-Headers', 'Content-Type')
+    resposta.status(204)                                                                    
+    resposta.end()                          
+})
+
 roteador.get('/', async (requisicao, resposta) => {
     console.log('Im in index fornecedores');
     const resultados = await TabelaFornecedor.listar()
