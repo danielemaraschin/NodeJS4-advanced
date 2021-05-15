@@ -20,7 +20,6 @@ roteador.get('/', async (requisicao, resposta) => { //listagem de produtos
         serializador.serializar(produtos) //serializador já está instanciado por isso pode chamar aqui
     )
 })
-
 // Vamos trabalhar na raiz da requisicao por isso '/' //PROXIMO é o midleware
 roteador.post('/', async (requisicao, resposta, proximo) => {
     try {
@@ -44,7 +43,6 @@ roteador.post('/', async (requisicao, resposta, proximo) => {
         proximo(erro)
     }
 })
-
 roteador.options('/:id', (requisicao, resposta) => { //param 1 :HTTP headers/[param2]: ROUTES
     resposta.set('Access-Control-Allow-Methods', 'DELETE, GET,  HEAD, PUT') //Somente as rotas que trabalham com o id do produto
     resposta.set('Access-Control-Allow-Headers', 'Content-Type') // param 1 : nome do header param2:conteudo do header
