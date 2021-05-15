@@ -33,8 +33,13 @@ app.use((requisicao, resposta, proximo) => { //param 1 : nome header/[param2]:no
     proximo()
 })
 
-const roteador = require('./rotas/fornecedores')
-app.use('/api/fornecedores', roteador)
+const roteador = require('./rotas/fornecedores') //declara roteador fornecedor v1
+app.use('/api/fornecedores', roteador) //manda o roteador fornecedor de volta declarando para poder usar
+
+
+const roteadorv2 = require('./rotas/fornecedores/rotas.v2') // roteador fornecedor v2
+app.use('/api/v2/fornecedores', roteadorv2)
+
 
 app.use((erro, requisicao, resposta, proximo) => {
     let status = 500
