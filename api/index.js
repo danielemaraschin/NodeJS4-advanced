@@ -41,6 +41,9 @@ const roteadorv2 = require('./rotas/fornecedores/rotas.v2') // roteador forneced
 app.use('/api/v2/fornecedores', roteadorv2)
 
 
+const roteadorv3 = require('./rotas/fornecedores/rotas.v3') // roteador fornecedor v2
+app.use('/api/v3/fornecedores', roteadorv3)
+
 app.use((erro, requisicao, resposta, proximo) => {
     let status = 500
 
