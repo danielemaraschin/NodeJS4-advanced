@@ -16,7 +16,7 @@ roteador.options('/', (requisicao, resposta) => { //rota options pra dizer por q
 })
 
 roteador.get('/', async (requisicao, resposta) => {
-    console.log('Im in index fornecedores');
+    console.log('Im in index fornecedores v2');
     const resultados = await TabelaFornecedor.listar()
     console.log('LISTANDO');
     resposta.status(200)
